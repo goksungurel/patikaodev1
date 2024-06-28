@@ -1,0 +1,18 @@
+package summerstudy;
+import java.util.Scanner;
+public class dairealanı {
+public static void main(String[] args) {
+Scanner scanner =new Scanner(System.in);
+System.out.println("yarıçapı giriniz: ");
+double ycap=scanner.nextDouble();
+double dalani= Math.PI*ycap*ycap;
+double cevre=2*Math.PI*ycap;
+System.out.println("dairenin alanı:"+dalani);
+System.out.println("Direnin çevresi:" +cevre);
+double pi=3.14;
+System.out.println("merkez açıyı gir:");
+double merkezaci=scanner.nextDouble();
+double malani=(pi*(ycap*ycap)*merkezaci)/360;
+System.out.println("alanı:"+malani);
+}
+}

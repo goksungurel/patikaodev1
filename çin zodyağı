@@ -1,0 +1,47 @@
+package patika;
+
+import java.util.Scanner;
+
+public class CİNZODYAGI {
+public static void main(String[] args) {
+	Scanner sc=new Scanner(System.in);
+	System.out.println("Doğum yılınızı giriniz: ");
+	int dogum=sc.nextInt();
+	String cınz=null;
+	
+	if(dogum%12==0) {
+		cınz="maymun";
+		
+	} else if (dogum%12==1) {
+		cınz="horoz";
+	}else if (dogum%12==2) {
+		cınz="köpek";
+	}else if(dogum%12==3) {
+		cınz="domuz";
+	}else if(dogum%12==4) {
+		cınz="fare";
+	}else if(dogum%12==5) {
+		cınz="öküz";
+	}else if(dogum%12==6) {
+		cınz="kaplan";
+	}else if(dogum%12==7) {
+		cınz="tavşan";
+	}else if(dogum%12==8) {
+		cınz="ejderha";
+	}else if (dogum%12==9) {
+		cınz="yılan";
+	}else if(dogum%12==10) {
+		cınz="at";
+	}else if (dogum%12==11) {
+		cınz="koyun";
+	}else {
+		System.out.println("LÜTFEN 1-12 ARALIĞINDA DEĞER GİRİNİZ")
+	;}
+	
+	
+	
+	
+	System.out.println("çin zodyağı burcunuz: "+ cınz );
+	
+}
+}

@@ -1,0 +1,62 @@
+package patika;
+
+import java.util.Scanner;
+
+public class ucakbileti {
+private static double yasindirimoranı;
+
+public static void main(String[] args) {
+	Scanner scanner=new Scanner(System.in);
+	
+	double yas_12 = 100.0;
+    double yas_1265 = 200.0;
+    double yas_65 = 150.0;
+    double tip2 = 50.0;
+
+	
+	System.out.println("Mesafeyi km cinsinden giriniz:");
+	double mesafe=scanner.nextDouble();
+	double birimfiyat=0.10;
+	double mesafeücreti=mesafe*0.10;
+	
+	System.out.println("Yaşınızı giriniz:");
+	double yas=scanner.nextDouble();
+	
+	System.out.println("Yolculuk tipini giriniz:	"
+			+ "1.tek yön "
+			+ "2.çift yön");
+	int tip=scanner.nextInt();
+	
+	if(tip!=1 && tip!=2 &&mesafe<=0 && yas<=0) {
+		System.out.println("Hatalı veri girdiniz.");
+	}
+	System.out.println("Normal tutar:" + birimfiyat+"*"+mesafe+"="+ mesafeücreti );
+	if(yas<12) {
+		double yasindirimoranı=0.50;
+System.out.println(mesafeücreti*yasindirimoranı);
+	 
+	}else if (12<=yas && yas<=24) {
+		double yasindirimoranı=0.10;
+		System.out.println(mesafeücreti*yasindirimoranı);
+		 
+	
+	}else if(yas>65) {
+		 double yasindirmoranı=0.30;
+		System.out.println(mesafeücreti*yasindirmoranı);
+		 
+		
+	}
+	double indirimlihal=mesafeücreti-yasindirimoranı;
+	System.out.println("İndirimli tutar:" + indirimlihal);
+	
+	if(tip==2) {
+		double a =indirimlihal*0.20;     //Gidiş Dönüş Bilet İndirimi = İndirimli Tutar * 0.20 = 135 * 0.20 = 27 TL
+	 System.out.println("gidiş dönüş indirimi:"+ a);
+		System.out.println( "toplam tutar"+   2*(indirimlihal-a));
+		
+		
+	}
+	
+	
+}
+}

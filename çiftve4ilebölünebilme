@@ -1,0 +1,27 @@
+package patikaproje;
+
+import java.util.Scanner;
+public class teksayitoplamı {
+public static void main(String[] args) {
+	Scanner scanner=new Scanner(System.in);
+	int toplam=0;
+	
+	while(true) {
+		 System.out.println("Lütfen bir sayı giriniz :");
+         int sayi = scanner.nextInt();
+         
+         if(sayi%2==1) {
+        	 System.out.println("tek sayı girmeyiniz");
+        	 break;
+         }
+         
+         if(sayi%2==0 || sayi%4==0) {
+        	 toplam+=sayi;
+         }
+	}
+	 System.out.println("Çift ve 4ünkatı toplamı: " + toplam);
+     scanner.close();
+     
+     
+}
+}

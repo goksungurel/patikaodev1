@@ -1,0 +1,19 @@
+package patikaproje;
+
+import java.util.Scanner;
+
+public class katbulma {
+
+	public static void main(String[] args) {
+		Scanner scanner=new Scanner(System.in);
+		int sayi=scanner.nextInt();
+		for(int i=1;i<sayi; i*=4  ) {
+			System.out.println("4ün  katı olan sayılar:"+i);
+		}
+		for(int a=1; a<sayi; a*=5) {
+			System.out.println("5 in  katı olan sayılar:"+a);	
+		}
+		
+	}
+
+}

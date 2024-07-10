@@ -11,7 +11,7 @@ public class CombinationCalculator {
         if (r > n) {
             return 0;
         }
-        return factorial(n) / (factorial(r) + factorial(n - r));
+        return factorial(n) / (factorial(r) * factorial(n - r));
     }
 
     public static long factorial(int num) {

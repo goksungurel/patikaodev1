@@ -1,0 +1,31 @@
+import java.util.Scanner;
+
+public class BassayiTop {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Bir sayı giriniz:");
+        int sayi = scanner.nextInt();
+        
+        // Sayının basamak sayısını bulmak için bir yardımcı değişken kullanabiliriz
+        int tempSayi = sayi;
+        int basamakSayisi = 0;
+        
+        // Sayının basamak sayısını bulma
+        while (tempSayi != 0) {
+            tempSayi /= 10;
+            basamakSayisi++;
+        }
+        
+        // Basamak sayılarının toplamını bulma
+        int toplam = 0;
+        tempSayi = sayi; // Tekrar orijinal sayıya geri dönelim
+        
+        while (tempSayi != 0) {
+            int kalan = tempSayi % 10;
+            toplam += kalan;
+            tempSayi /= 10;
+        }
+        
+        System.out.println("Girilen sayının basamak sayılarının toplamı: " + toplam);
+    }
+}

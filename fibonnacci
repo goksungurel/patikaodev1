@@ -1,0 +1,26 @@
+package patika;
+import java.util.Scanner;
+public class fibonnacci {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+Scanner scanner =new Scanner(System.in);
+System.out.println("kaç elemanlı");
+int eleman=scanner.nextInt();
+int baslangic=0;
+int ikinci=1;
+System.out.print(baslangic + " " + ikinci + " ");
+
+
+
+for(int i=2;i<eleman;i++) {
+int toplam=baslangic+ikinci;
+
+	System.out.print(toplam+" ");
+	baslangic=ikinci;
+	ikinci=toplam;
+}
+scanner.close();
+	}
+
+}

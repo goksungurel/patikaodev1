@@ -1,0 +1,25 @@
+public class RecursivePower{
+
+// Recursive üs hesaplama fonksiyonu
+public static int pwr(int sayi, int pwr) {
+    if (pwr == 0) { // Eğer üs 0 ise
+        return 1;    // Sonuç 1 olmalı
+    } else {
+        return sayi * pwr(sayi, pwr - 1); // sayıyı tekrar kendisiyle çarparak üsse göre azalan bir işlem yap
+    }
+}
+
+public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("Lütfen sayı giriniz: ");
+    int sayi = scanner.nextInt();
+
+    System.out.println("Lütfen üssü giriniz: ");
+    int pwr = scanner.nextInt();
+
+    int sonuc = pwr(sayi, pwr); // Recursive fonksiyonu çağırıyoruz
+    System.out.println(sayi + " üzeri " + pwr + " = " + sonuc);
+}
+
+}

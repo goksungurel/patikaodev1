@@ -1,0 +1,90 @@
+Binary Search Tree (BST) Oluşturma Aşamaları
+Verilen dizi: [7, 5, 1, 8, 3, 6, 0, 9, 4, 2]
+
+Binary Search Tree'de (BST), her eleman ağaçta belirli bir kurala göre yerleştirilir:
+
+Sol alt düğüm (left subtree), ana düğümden (root) küçük olmalıdır.
+Sağ alt düğüm (right subtree), ana düğümden büyük olmalıdır.
+Aşamalar:
+İlk eleman: 7
+İlk eleman root (kök) olur:
+Root = 7
+İkinci eleman: 5
+5, root olan 7'den küçük olduğu için sol tarafa yerleştirilir:
+Root = 7
+Solunda: 5
+Üçüncü eleman: 1
+1, 7'den küçük olduğu için sola gider. 1, 5'ten de küçük olduğu için 5'in soluna yerleştirilir:
+Root = 7
+Solunda: 5
+5'in solunda: 1
+Dördüncü eleman: 8
+8, 7'den büyük olduğu için sağ tarafa yerleştirilir:
+Root = 7
+Solunda: 5
+Sağında: 8
+Beşinci eleman: 3
+3, 7'den küçük, 5'ten de küçük ama 1'den büyük olduğu için 1'in sağına yerleştirilir:
+Root = 7
+Solunda: 5
+5'in solunda: 1
+1'in sağında: 3
+Altıncı eleman: 6
+6, 7'den küçük ama 5'ten büyük olduğu için 5'in sağına yerleştirilir:
+Root = 7
+Solunda: 5
+5'in solunda: 1
+1'in sağında: 3
+5'in sağında: 6
+Yedinci eleman: 0
+0, 7'den, 5'ten ve 1'den küçük olduğu için 1'in soluna yerleştirilir:
+Root = 7
+Solunda: 5
+5'in solunda: 1
+1'in solunda: 0
+1'in sağında: 3
+5'in sağında: 6
+Sekizinci eleman: 9
+9, 7'den ve 8'den büyük olduğu için 8'in sağına yerleştirilir:
+Root = 7
+Solunda: 5
+5'in solunda: 1
+1'in solunda: 0
+1'in sağında: 3
+5'in sağında: 6
+Sağında: 8
+8'in sağında: 9
+Dokuzuncu eleman: 4
+4, 7'den küçük, 5'ten küçük ama 3'ten büyük olduğu için 3'ün sağına yerleştirilir:
+Root = 7
+Solunda: 5
+5'in solunda: 1
+1'in solunda: 0
+1'in sağında: 3
+3'ün sağında: 4
+5'in sağında: 6
+Sağında: 8
+8'in sağında: 9
+Onuncu eleman: 2
+2, 7'den küçük, 5'ten küçük, 1'in sağında ve 3'ten küçük olduğu için 3'ün soluna yerleştirilir:
+Root = 7
+Solunda: 5
+5'in solunda: 1
+1'in solunda: 0
+1'in sağında: 3
+3'ün solunda: 2
+3'ün sağında: 4
+5'in sağında: 6
+Sağında: 8
+8'in sağında: 9
+Sonuç:
+Root = 7
+Solunda: 5
+5'in solunda: 1
+1'in solunda: 0
+1'in sağında: 3
+3'ün solunda: 2
+3'ün sağında: 4
+5'in sağında: 6
+Sağında: 8
+8'in sağında: 9

@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+public class RecursivePattern {
+
+    // Recursive metot: sayıyı azaltır ve sonra artırır
+    public static void pattern(int sayi, int temp, boolean azaltiyor) {
+        // Sayı negatif veya 0 olana kadar azaltma işlemi
+        System.out.print(sayi + " ");
+        
+        if (sayi <= 0) {
+            azaltiyor = false; // Negatif olduğunda artık artırmaya geçiyoruz
+        }
+
+        // Azaltma kısmı: 5 çıkar
+        if (azaltiyor) {
+            pattern(sayi - 5, temp, true); 
+        } 
+        // Artırma kısmı: 5 ekler, temp başlangıç değeridir
+        else if (sayi < temp) {
+            pattern(sayi + 5, temp, false); 
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("N Sayısı: ");
+        int n = scanner.nextInt();
+
+        // Recursive metodu çağırıyoruz, başlangıçta azaltma ile başlıyoruz
+        pattern(n, n, true);
+    }
+}

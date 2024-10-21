@@ -1,0 +1,14 @@
+Merge Sort'un Aşamaları:
+
+[16, 21, 11, 8, 12, 22]
+[16, 21, 11] ve [8, 12, 22]
+[16], [21, 11], [8], [12, 22]
+[16], [21], [11], [8], [12], [22]
+[11, 21], [12, 22]
+[11, 16, 21], [8, 12, 22]
+[8, 11, 12, 16, 21, 22]
+Big-O Gösterimi:
+
+Best Case (En iyi durum): O(n log n)
+Average Case (Ortalama durum): O(n log n)
+Worst Case (En kötü durum): O(n log n)

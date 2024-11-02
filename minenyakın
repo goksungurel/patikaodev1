@@ -1,0 +1,32 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        int[] list = {15, 12, 788, 1, -1, -778, 2, 0};
+
+        // Kullanıcıdan sayı al
+        Scanner input = new Scanner(System.in);
+        System.out.print("Bir sayı giriniz: ");
+        int number = input.nextInt();
+
+        // Diziyi sırala
+        Arrays.sort(list);
+
+        Integer closestMin = null;
+        Integer closestMax = null;
+
+        for (int i : list) {
+            if (i < number) {
+                closestMin = i;  // Girilen sayıdan küçük en yakın değeri güncelle
+            } else if (i > number && closestMax == null) {
+                closestMax = i;  // İlk büyük değer en yakın büyük sayı olur
+                break;
+            }
+        }
+
+        // Sonuçları yazdır
+        System.out.println("Girilen sayıdan küçük en yakın sayı: " + closestMin);
+        System.out.println("Girilen sayıdan büyük en yakın sayı: " + closestMax);
+    }
+}

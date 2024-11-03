@@ -1,0 +1,23 @@
+public class FrekansBulma {
+public static void main(String[] args) {
+int[] dizi = {10, 20, 20, 10, 10, 20, 5, 20};
+boolean[] sayildi = new boolean[dizi.length]; // Elemanların sayılıp sayılmadığını tutan dizi
+    for (int i = 0; i < dizi.length; i++) {
+        if (sayildi[i]) { // Eğer bu eleman zaten sayıldıysa, atla
+            continue;
+        }
+
+        int count = 1; // Tekrar sayısını başlat
+
+        for (int j = i + 1; j < dizi.length; j++) {
+            if (dizi[i] == dizi[j]) {
+                count++; // Eşleşen elemanı say
+                sayildi[j] = true; // Bu elemanı sayıldığını işaretle
+            }
+        }
+
+        // Sonuçları yazdır
+        System.out.println(dizi[i] + " sayısı " + count + " kere tekrar edildi.");
+    }
+}
+}

@@ -1,0 +1,158 @@
+ackage bitirmeprojesi;
+import java.util.Scanner;
+import java.util.Random;
+
+public class MineSweeper {
+    private int row;
+    private int column;
+    private String[][] board;  // Real board
+    private String[][] displayBoard; // The game board shown to the player
+    private boolean[][] revealed;  // Keeps track of which cells have been revealed
+    private boolean[][] selectedCoordinates; // Tracks the cells selected by the user
+    private int mineCount;  // Keeps track of the total number of mines
+
+    public MineSweeper(int row, int column) {
+        Scanner scanner = new Scanner(System.in);
+        
+        do {
+            System.out.println("Satır sayısını giriniz(min 2): ");
+            this.row = scanner.nextInt();
+            System.out.println("Sütun sayısını girin(min 2): ");
+            this.column = scanner.nextInt();
+            
+            if (this.row < 2 || this.column < 2) {
+                System.out.println("Geçersiz boyut! 2x2 den küçük olamaz");
+            }
+        } while (this.row < 2 || this.column < 2); // Giriş geçerli olana kadar tekrar sor
+        
+        // Oyun tahtalarını başlatıyoruz
+        this.board = new String[this.row][this.column];
+        this.displayBoard = new String[this.row][this.column];
+        this.revealed = new boolean[this.row][this.column];
+        this.selectedCoordinates = new boolean[this.row][this.column];
+        
+        // Mayın sayısını hesaplıyoruz: tahta boyutunun çeyreği kadar mayın yerleştirilecek
+        this.mineCount = (this.row * this.column) / 4;
+        
+        initializeBoard();
+        placeMines();
+    }
+    
+    private void initializeBoard() {
+        // Board ve displayBoard dizilerini başlangıç değerleri ile doldur
+        for (int i = 0; i < this.row; i++) {
+            for (int j = 0; j < this.column; j++) {
+                this.board[i][j] = "-";  // Asıl tahtada tüm hücreler gizli (-)
+                this.displayBoard[i][j] = "-";  // Kullanıcıya gösterilecek tahtada da aynı
+                this.revealed[i][j] = false; // Hiçbir hücre açılmadı
+                this.selectedCoordinates[i][j] = false;  // Hiçbir hücre seçilmedi
+            }
+        }
+    }
+
+    // Mayınları rastgele yerleştirme
+    private void placeMines() {
+        Random random = new Random();
+        int minesPlaced = 0;
+        while (minesPlaced < mineCount) {
+            int row = random.nextInt(this.row);
+            int column = random.nextInt(this.column);
+            
+            if (!this.board[row][column].equals("*")) { // Eğer bu hücrede mayın yoksa
+                this.board[row][column] = "*"; // Mayın yerleştir
+                minesPlaced++;
+            }
+        }
+    }
+
+    // Komşulardaki mayın sayısının hesaplanması
+    private int countNeighborMines(int row, int column) {
+        int count = 0;
+        
+        // Sekiz komşuyu kontrol et
+        for (int i = row - 1; i <= row + 1; i++) {
+            for (int j = column - 1; j <= column + 1; j++) {
+                if (i >= 0 && i < this.row && j >= 0 && j < this.column && this.board[i][j].equals("*")) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    // Kullanıcıdan giriş al
+    public void getUserInput() {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.print("Satır girin: ");
+            int userRow = scanner.nextInt();
+            System.out.print("Sütun girin: ");
+            int userColumn = scanner.nextInt();
+        
+            if (userRow < 0 || userRow >= row || userColumn < 0 || userColumn >= column) {
+                System.out.println("Geçersiz koordinat! Lütfen tekrar girin.");
+                continue;
+            }
+        
+            if (selectedCoordinates[userRow][userColumn]) {
+                System.out.println("Bu koordinat daha önce seçildi, başka bir koordinat girin.");
+                continue;
+            }
+        
+            selectedCoordinates[userRow][userColumn] = true;
+
+            // Mayına basıldıysa, oyunu kaybet
+            if (board[userRow][userColumn].equals("*")) {
+                System.out.println("Mayına bastınız! Oyunu kaybettiniz.");
+                break;
+            } else {
+                // Komşulardaki mayın sayısını hesapla ve göster
+                int mineCount = countNeighborMines(userRow, userColumn);
+                displayBoard[userRow][userColumn] = Integer.toString(mineCount);
+
+                // Haritayı göster
+                displayGameBoard();
+
+                // Kazanma kontrolü
+                if (checkWin()) {
+                    System.out.println("Tebrikler! Oyunu kazandınız.");
+                    break;
+                }
+            }
+        }
+    }
+
+    // Kullanıcıya gösterilen haritayı yazdır
+    private void displayGameBoard() {
+    	System.out.println("Güncel oyun tahtası: ");
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                System.out.print(displayBoard[i][j] + " "); // Satır sonlarında fazla boşlukları önler
+            }
+            System.out.println(); // Satırın sonunda yeni bir satıra geç
+        }
+    }
+
+    // Kazanma durumu kontrolü
+    private boolean checkWin() {
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (!selectedCoordinates[i][j] && !board[i][j].equals("*")) {
+                    return false; // Eğer hiç açılmamış bir hücre varsa kazanılmamış demektir
+                }
+            }
+        }
+        return true; // Tüm hücreler açıldı, kazanıldı
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Satır sayısını girin: ");
+        int row = scanner.nextInt();
+        System.out.println("Sütun sayısını girin: ");
+        int column = scanner.nextInt();
+        MineSweeper game = new MineSweeper(row, column);
+        game.getUserInput();
+    }
+}

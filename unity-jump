@@ -1,0 +1,97 @@
+using UnityEngine;
+
+public class charachtercontroller : MonoBehaviour
+{
+    public float jumpForce = 200.0f;
+    public float speed = 2.0f;
+    private float moveDirection;
+    private bool jump;
+    private bool grounded = true;
+    private bool moving;
+    private Rigidbody2D _rigidbody2D;
+    private SpriteRenderer _spriteRenderer;
+    private Animator anim;
+
+    void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
+
+    void Start()
+    {
+        _rigidbody2D = GetComponent<Rigidbody2D>(); // Rigidbody2D bileşenini alıyoruz
+        _spriteRenderer = GetComponent<SpriteRenderer>(); // SpriteRenderer bileşenini alıyoruz
+    }
+
+    private void FixedUpdate()
+    {
+        // Yalnızca yatay yönü kontrol ediyoruz (yavaşlatma yoksa dikey hız korunur)
+        _rigidbody2D.velocity = new Vector2(speed * moveDirection, _rigidbody2D.velocity.y);
+
+        // Zıplama işlemi (yönü kontrol etmeden sadece 'y' bileşenini değiştiriyoruz)
+        if (jump)
+        {
+            _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpForce); // Yalnızca 'y' yönünü değiştiriyoruz
+            jump = false; // Zıplama işlemi bitince 'jump' false yapılır
+        }
+    }
+
+    private void Update()
+    {
+        if (grounded == true && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)))
+        {
+            if (Input.GetKey(KeyCode.A))
+            {
+                moveDirection = -1.0f; // Solda hareket
+                _spriteRenderer.flipX = true; // Sprite'ı ters çevir
+                anim.SetFloat("speed", Mathf.Abs(speed)); // Animasyonu hızla güncelle
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                moveDirection = 1.0f; // Sağda hareket
+                _spriteRenderer.flipX = false; // Sprite'ı doğru yönüne çevir
+                anim.SetFloat("speed", Mathf.Abs(speed)); // Animasyonu hızla güncelle
+            }
+        }
+        else if (grounded == true)
+        {
+            moveDirection = 0.0f; // Yerde değilse hareket etmesin
+            anim.SetFloat("speed", 0.0f); // Animasyon duruşa geçer
+        }
+
+        // Zıplama için 'W' tuşuna basılmasını kontrol et
+        if (grounded && Input.GetKey(KeyCode.W))
+        {
+            jump = true; // Zıplama işlevini tetikle
+            grounded=false;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Yere değdiğinde
+        if (collision.gameObject.CompareTag("Ground")) // Yerde olduğuna emin olun
+        {
+            grounded = true; // Yerde olduğunu belirt
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        // Yerden ayrıldığında
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            grounded = false; // Yerden ayrıldığında zıplayabilir
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.CompareTag("Zemin"))
+        {
+            grounded=true; 
+        }
+     
+        
+    }
+}

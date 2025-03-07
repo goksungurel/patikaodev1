@@ -1,4 +1,4 @@
-ackage bitirmeprojesi;
+package bitirmeprojesi;
 import java.util.Scanner;
 import java.util.Random;
 
